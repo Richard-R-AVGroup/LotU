@@ -12,7 +12,7 @@ public class wallBehaviour : MonoBehaviour
     void Start()
     {
         hit = false;                                                            //var if the wall has been hit
-        setColor = this.GetComponent<MeshRenderer>().material.color;            //var for the color of the wall
+        setColor = this.GetComponent<MeshRenderer>().material.color;       //var for the color of the wall
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class wallBehaviour : MonoBehaviour
     void ColourTransparent()                                                    //sets alpha to transparent
     {
         setColor.a = 0.1f;
-        this.GetComponent<MeshRenderer>().material.color = setColor;
+        this.GetComponent<MeshRenderer>().material.color  = setColor;
     }
 
     void ColourOpaque()                                                         //sets alpha to max

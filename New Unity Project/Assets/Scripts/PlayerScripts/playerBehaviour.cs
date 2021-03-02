@@ -20,7 +20,7 @@ public class playerBehaviour : MonoBehaviour
     public GameObject weapon;
     public GameObject weaponLocation;      // location of the weapon model
 
-    public Camera camera;
+    public Camera playerCamera;
 
     void Start()
     {
@@ -105,7 +105,7 @@ public class playerBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             Vector3 lookTarget;
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             LayerMask mask = LayerMask.GetMask("Ground");
 
