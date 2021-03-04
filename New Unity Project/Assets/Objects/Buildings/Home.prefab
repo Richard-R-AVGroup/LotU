@@ -223,6 +223,8 @@ MonoBehaviour:
   hit: 0
   sideWall: 0
   setColor: {r: 0, g: 0, b: 0, a: 0}
+  solidMat: {fileID: 0}
+  transparentMat: {fileID: 0}
 --- !u!1 &5760813596768595160
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +353,8 @@ MonoBehaviour:
   hit: 0
   sideWall: 0
   setColor: {r: 0, g: 0, b: 0, a: 0}
+  solidMat: {fileID: 2100000, guid: e1088f64bb7d102408b3b63cfa0ac4ae, type: 2}
+  transparentMat: {fileID: 2100000, guid: 79f645b5483753b4d9b196058a710e30, type: 2}
 --- !u!1 &5760813596837566733
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +615,8 @@ MonoBehaviour:
   hit: 0
   sideWall: 0
   setColor: {r: 0, g: 0, b: 0, a: 0}
+  solidMat: {fileID: 0}
+  transparentMat: {fileID: 0}
 --- !u!1 &5760813597071933982
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +840,8 @@ MonoBehaviour:
   hit: 0
   sideWall: 0
   setColor: {r: 0, g: 0, b: 0, a: 0}
+  solidMat: {fileID: 0}
+  transparentMat: {fileID: 0}
 --- !u!1 &5760813597182162734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1024,8 @@ MonoBehaviour:
   hit: 0
   sideWall: 0
   setColor: {r: 0, g: 0, b: 0, a: 0}
+  solidMat: {fileID: 0}
+  transparentMat: {fileID: 0}
 --- !u!208 &5760813597423372210
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1160,6 +1170,8 @@ MonoBehaviour:
   hit: 0
   sideWall: 0
   setColor: {r: 0, g: 0, b: 0, a: 0}
+  solidMat: {fileID: 0}
+  transparentMat: {fileID: 0}
 --- !u!1001 &5009876046219062412
 PrefabInstance:
   m_ObjectHideFlags: 0

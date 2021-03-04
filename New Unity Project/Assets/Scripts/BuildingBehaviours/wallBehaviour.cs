@@ -7,6 +7,8 @@ public class wallBehaviour : MonoBehaviour
     public bool hit;
     public bool sideWall;
     public Color setColor;
+    public Material solidMat;
+    public Material transparentMat;
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +32,14 @@ public class wallBehaviour : MonoBehaviour
 
     void ColourTransparent()                                                    //sets alpha to transparent
     {
-        setColor.a = 0.1f;
+        setColor.a = 0.2f;
+        this.GetComponent<Renderer>().material = transparentMat;
         this.GetComponent<MeshRenderer>().material.color  = setColor;
     }
 
     void ColourOpaque()                                                         //sets alpha to max
     {
+        this.GetComponent<Renderer>().material = solidMat;
         setColor.a = 1;
         this.GetComponent<MeshRenderer>().material.color = setColor;
     }
