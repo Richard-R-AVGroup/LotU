@@ -8,23 +8,37 @@ public class cameraBehaviour : MonoBehaviour
     public string objName;
     public wallBehaviour[] wallChildren;
     public Transform playerPos;
+    public Vector3 currentPos;
+    public Vector3 convoPos;
+    public Quaternion currentRot;
+    public Quaternion convoRot;
+    public Transform newTrans;
+    public bool move;
+
+    public bool test;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        move = false;
+        currentRot = this.transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+            
     }
 
     void FixedUpdate()
     {
         ///
-        this.transform.position = Vector3.Lerp(new Vector3(playerPos.position.x, 8.554f, playerPos.position.z), new Vector3(this.transform.position.x - 4.5f, 15.554f, this.transform.position.z ) ,0.7f);
+        if (move == false)
+        {
+            this.transform.position = Vector3.Lerp(new Vector3(playerPos.position.x, 8.554f, playerPos.position.z), new Vector3(this.transform.position.x - 4.5f, 15.554f, this.transform.position.z), 0.7f);
+            this.transform.rotation = currentRot;
+        }
 
         ///Raycast
         RaycastHit hit;

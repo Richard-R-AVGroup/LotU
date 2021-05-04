@@ -8,14 +8,19 @@ public class npcPathfinding : MonoBehaviour
 
     public Transform goal;
     NavMeshAgent agent;
+
     public float navWait;
     public bool enterDoor;
+
     public bool shopkeeper;
     public bool working;
     public bool active;
+    public bool talking;
+
     public GameObject ownedStore;
     public Transform[] owned;
     public List<GameObject> workObjects = new List<GameObject>();
+
     public float workingTime;
     public int randLocation;
     public GameObject selectedObj;
@@ -36,15 +41,19 @@ public class npcPathfinding : MonoBehaviour
     void Update()
     {
         if (enterDoor == true)                      //if entering a door
-            enteringDoor();                         //activate door opening behaviour
+            enteringDoor();                         //start door opening behaviour
 
-        if (this.GetComponent<Transform>().position.magnitude - goal.position.magnitude < 0.2f && working == false)   // if the npc is close enough to the goal and working == false (working might be redundant)
+        if (talking == true)                        //if NPC is talking to a player
+            isTalking();                            //start talking behaviour
+
+        if (Vector3.Distance(this.transform.position, goal.transform.position) < 0.8f)   // if the npc is close enough to the goal and working == false (working might be redundant)
         {
             agent.speed = 0;                            //npc pathfinding speed = 0
             if (workingTime >= 0)                       //if the workingTime timer reaches 0 or less 
                 agent.speed = 3.5f;                     //set the pathfinding speed to the normal walking speed;
             if (goal.name == "ShopkeepPosition")        //if the npc gets to the shopkeepers location of the object
             {
+                transform.rotation = Quaternion.Lerp(transform.rotation, goal.gameObject.transform.parent.rotation, 2f * Time.deltaTime);
                 if (workObjects.Capacity == 0)          //if the store hasnt found the working objects yet
                 {
                     working = true;                     //reset the working var
@@ -60,7 +69,7 @@ public class npcPathfinding : MonoBehaviour
             if (workingTime <= 0)                       //if it reaches 0 or less than
             {
                 agent.speed = 3.5f;                                                                                 //reset the npc speed
-                randLocation = (int)Mathf.Floor(Random.Range(0, workObjects.Capacity));                             //set a random int based on the capacity of the objects available
+                randLocation = (int)Mathf.Floor(Random.Range(0, workObjects.Capacity-1));                             //set a random int based on the capacity of the objects available
                 goal = workObjects[randLocation].GetComponentInChildren<Transform>().Find("ShopkeepPosition");      //set the pathfinding goal by finding the object in the list from the randLocation int and searching for the shopKeepLocation child position within the object
                 active = true;                                                                                      //set active true as the npc is actively moving
                 working = false;                                                                                    //set working to false as the npc is moving
@@ -123,7 +132,7 @@ public class npcPathfinding : MonoBehaviour
     {
         if (owned != null)
         {
-            for (int i = 0; i <= owned.Length; i++)
+            for (int i = 0; i <= owned.Length - 1; i++)
             {
                 switch (owned[i].gameObject.name)
                 {
@@ -144,6 +153,29 @@ public class npcPathfinding : MonoBehaviour
                         break;
                 }
             }
+        }
+    }
+    
+    public void isTalking()
+    {
+        agent.speed = 0;
+        working = false;
+        /*
+        if (goal.tag == "Player")
+        {
+            transform.rotation = Quaternion.Lerp(new Quaternion(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z, 0), new Quaternion(goal.transform.rotation.x, goal.transform.rotation.y, goal.transform.rotation.z, 0), 2f * Time.deltaTime);
+            agent.speed = 3.5f;
+        }
+        */
+        workingTime = 0;
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            talking = false;
+            working = true;
+            workingTime = Random.Range(6, 16);
+            agent.speed = 3.5f;
+            return;
         }
     }
 }

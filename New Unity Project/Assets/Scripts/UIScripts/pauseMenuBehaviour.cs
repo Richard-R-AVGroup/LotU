@@ -14,7 +14,7 @@ public class pauseMenuBehaviour : MonoBehaviour
     void Start()
     {
         pausePos = this.GetComponent<Transform>().position;
-        unpausePos = pausePos + new Vector3(0, 700, 0);
+        unpausePos = pausePos + new Vector3(0, 2200, 0);
         transform.position = unpausePos;
     }
 

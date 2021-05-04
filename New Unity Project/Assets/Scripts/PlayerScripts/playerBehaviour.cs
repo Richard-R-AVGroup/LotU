@@ -11,6 +11,8 @@ public class playerBehaviour : MonoBehaviour
     public float maxSpeed;              //fastest speed the player can go
     public float walkingRot;       //holder for the rotation.y variable
     public float attackSpeed;
+
+    public bool talking;
     public bool isAttacking;
     public bool turn;
     public bool walk;
@@ -19,6 +21,7 @@ public class playerBehaviour : MonoBehaviour
 
     public GameObject weapon;
     public GameObject weaponLocation;      // location of the weapon model
+    public GameObject playerEyes;
 
     public Camera playerCamera;
 
@@ -30,6 +33,7 @@ public class playerBehaviour : MonoBehaviour
         }
 
         attackSpeed = 3;
+        talking = false;
     }
 
 
@@ -63,82 +67,85 @@ public class playerBehaviour : MonoBehaviour
     */
     public void characterMovement()
     {
-
-        if (Input.GetKey(KeyCode.W))
+        if (talking == false)
         {
-            this.GetComponent<Rigidbody>().AddForce(Vector3.right * speed * Time.deltaTime);
-            walkingRot = 180;
-            if (Input.GetAxis("Vertical") > 0 && walk == false)
-                transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, walkingRot, 0, 0), 1);
-            turn = true;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-
-            this.GetComponent<Rigidbody>().AddForce(Vector3.right * -speed * Time.deltaTime);
-            walkingRot = 0;
-            if (Input.GetAxis("Vertical") < 0 && walk == false)
-                transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, walkingRot, 0, 0), 1);
-            turn = true;
-
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            this.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed * Time.deltaTime);
-            walkingRot = 90;
-            if (Input.GetAxis("Horizontal") < 0 && walk == false)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 1);
-            turn = true;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            this.GetComponent<Rigidbody>().AddForce(Vector3.forward * -speed * Time.deltaTime);
-            walkingRot = 270;
-            if (Input.GetAxis("Horizontal") > 0 && walk == false)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 1);
-            turn = true;
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Vector3 lookTarget;
-            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            LayerMask mask = LayerMask.GetMask("Ground");
-
-
-            if (Physics.Raycast(ray, out hit, 100, mask))
+            if (Input.GetKey(KeyCode.W))
             {
-                lookTarget = hit.point;
-                transform.LookAt(lookTarget);
-                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 90, 0);
+                this.GetComponent<Rigidbody>().AddForce(Vector3.right * speed * Time.deltaTime);
+                walkingRot = 180;
+                if (Input.GetAxis("Vertical") > 0 && walk == false)
+                    transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, walkingRot, 0, 0), 1);
+                turn = true;
             }
 
-
-            maxSpeed = (3);
-            walk = true;
-
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKey(KeyCode.S))
             {
-                attackSpeed = 3;
-                weapon.GetComponent<weaponBehaviour>().attack = true;
-                weapon.GetComponent<weaponBehaviour>().attacking = true;
 
-                if (weapon.GetComponent<weaponBehaviour>().combo == 0)
-                    weapon.GetComponent<weaponBehaviour>().combo ++;
+                this.GetComponent<Rigidbody>().AddForce(Vector3.right * -speed * Time.deltaTime);
+                walkingRot = 0;
+                if (Input.GetAxis("Vertical") < 0 && walk == false)
+                    transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, walkingRot, 0, 0), 1);
+                turn = true;
 
-                else if (weapon.GetComponent<weaponBehaviour>().combo == 1)
-                    weapon.GetComponent<weaponBehaviour>().combo ++;
+            }
 
-                else if (weapon.GetComponent<weaponBehaviour>().combo == 2)
-                    weapon.GetComponent<weaponBehaviour>().combo --;
+            if (Input.GetKey(KeyCode.A))
+            {
+                this.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed * Time.deltaTime);
+                walkingRot = 90;
+                if (Input.GetAxis("Horizontal") < 0 && walk == false)
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 1);
+                turn = true;
+            }
 
-                isAttacking = true;
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.GetComponent<Rigidbody>().AddForce(Vector3.forward * -speed * Time.deltaTime);
+                walkingRot = 270;
+                if (Input.GetAxis("Horizontal") > 0 && walk == false)
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 1);
+                turn = true;
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Vector3 lookTarget;
+                Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                LayerMask mask = LayerMask.GetMask("Ground");
+
+
+                if (Physics.Raycast(ray, out hit, 100, mask))
+                {
+                    lookTarget = hit.point;
+                    transform.LookAt(lookTarget);
+                    transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 90, 0);
+                }
+
+
+                maxSpeed = (3);
+                walk = true;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    attackSpeed = 3;
+                    weapon.GetComponent<weaponBehaviour>().attack = true;
+                    weapon.GetComponent<weaponBehaviour>().attacking = true;
+
+                    if (weapon.GetComponent<weaponBehaviour>().combo == 0)
+                        weapon.GetComponent<weaponBehaviour>().combo++;
+
+                    else if (weapon.GetComponent<weaponBehaviour>().combo == 1)
+                        weapon.GetComponent<weaponBehaviour>().combo++;
+
+                    else if (weapon.GetComponent<weaponBehaviour>().combo == 2)
+                        weapon.GetComponent<weaponBehaviour>().combo--;
+
+                    isAttacking = true;
+                }
             }
         }
+        else return;
 
         if(Input.GetKeyUp(KeyCode.LeftShift))
         {
@@ -168,12 +175,52 @@ public class playerBehaviour : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            GameObject.Find("GameManager").GetComponent<gmBehaviour>().isPaused = true;
+            if (talking == false)
+                GameObject.Find("GameManager").GetComponent<gmBehaviour>().isPaused = true;
+            else
+            {
+                StopCoroutine("talkingCamera");
+                talking = false;
+                playerCamera.GetComponent<cameraBehaviour>().move = false;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Door" && Input.GetKeyDown(KeyCode.E))
+        {
+            collision.gameObject.GetComponent<doorBehaviour>().open = true;
+        }
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "NPC" && Input.GetKeyDown(KeyCode.E))
+        {
+            playerCamera.GetComponent<cameraBehaviour>().move = true;
+            other.GetComponent<npcPathfinding>().talking = true;
+            other.GetComponent<npcPathfinding>().goal = this.gameObject.GetComponent<Transform>().transform;
+
+            talking = true;
+            StartCoroutine("talkingCamera");
         }
     }
 
     public float AngleBetweenPoints(Vector3 a, Vector3 b)
     {
         return Mathf.Atan2(b.x - a.x, b.y - a.y) * Mathf.Rad2Deg;
+    }
+
+    private IEnumerator talkingCamera()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1 * Time.deltaTime);
+            playerCamera.transform.position = Vector3.Slerp(playerCamera.transform.position, playerEyes.transform.position, 0.3f);
+            playerCamera.transform.rotation = Quaternion.Slerp(playerCamera.transform.rotation, playerEyes.transform.rotation, 0.3f);
+        }
+        
     }
 }

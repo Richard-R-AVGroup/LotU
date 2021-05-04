@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815022836560493454}
   m_LocalRotation: {x: -0.000000009448721, y: -0.56912416, z: -0.8222517, w: 0.00000006240635}
-  m_LocalPosition: {x: 0, y: 0.454, z: -0.2}
+  m_LocalPosition: {x: 0, y: 0.514, z: -0.388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1815022836585814175}
@@ -5059,7 +5059,9 @@ MonoBehaviour:
   outsideLant: 0
   insideLant: 0
   lightsource: {fileID: 1815022836718266733}
+  emberSource: {fileID: 0}
   minLightFlicker: 4
+  sunPos: 0
 --- !u!1 &1815022836718266731
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,8 +5104,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.90151685, b: 0.4292453, a: 1}
-  m_Intensity: 4.18
+  m_Color: {r: 1, g: 0.90330184, b: 0.4198113, a: 1}
+  m_Intensity: 4.67
   m_Range: 10
   m_SpotAngle: 179
   m_InnerSpotAngle: 21.80208

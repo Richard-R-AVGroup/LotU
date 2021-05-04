@@ -57,20 +57,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UIScripts\ButtonScripts\buttonBehaviour.cs" />
-    <Compile Include="Assets\sunBehaviour.cs" />
-    <Compile Include="Assets\Scripts\BuildingBehaviours\storeBehaviour.cs" />
+    <Compile Include="Assets\Scripts\GameBehaviourScripts\sunBehaviour.cs" />
+    <Compile Include="Assets\Scripts\BuildingScripts\storeBehaviour.cs" />
     <Compile Include="Assets\Scripts\NPCScipts\npcPathfinding.cs" />
-    <Compile Include="Assets\Scripts\BuildingBehaviours\doorBehaviour.cs" />
+    <Compile Include="Assets\Scripts\BuildingScripts\doorBehaviour.cs" />
     <Compile Include="Assets\Scripts\UIScripts\pauseMenuBehaviour.cs" />
-    <Compile Include="Assets\barrierScript.cs" />
+    <Compile Include="Assets\Scripts\GameBehaviourScripts\barrierScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\playerBehaviour.cs" />
     <Compile Include="Assets\Scripts\weaponBehaviour.cs" />
-    <Compile Include="Assets\Scripts\gameObjLibrary.cs" />
+    <Compile Include="Assets\Scripts\GameBehaviourScripts\gameObjLibrary.cs" />
+    <Compile Include="Assets\Scripts\FurnitureScripts\torchBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\cameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\dummyBehaviour.cs" />
-    <Compile Include="Assets\Scripts\BuildingBehaviours\wallBehaviour.cs" />
-    <Compile Include="Assets\Scripts\gmBehaviour.cs" />
-    <Compile Include="Assets\torchBehaviour.cs" />
+    <Compile Include="Assets\Scripts\BuildingScripts\wallBehaviour.cs" />
+    <Compile Include="Assets\Scripts\GameBehaviourScripts\gmBehaviour.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
