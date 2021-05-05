@@ -45,7 +45,7 @@ public class npcPathfinding : MonoBehaviour
 
         if (talking == true)                        //if NPC is talking to a player
             isTalking();                            //start talking behaviour
-
+        else
         if (Vector3.Distance(this.transform.position, goal.transform.position) < 0.8f)   // if the npc is close enough to the goal and working == false (working might be redundant)
         {
             agent.speed = 0;                            //npc pathfinding speed = 0
@@ -160,13 +160,16 @@ public class npcPathfinding : MonoBehaviour
     {
         agent.speed = 0;
         working = false;
-        /*
+        
         if (goal.tag == "Player")
         {
-            transform.rotation = Quaternion.Lerp(new Quaternion(this.transform.rotation.x, this.transform.rotation.y, this.transform.rotation.z, 0), new Quaternion(goal.transform.rotation.x, goal.transform.rotation.y, goal.transform.rotation.z, 0), 2f * Time.deltaTime);
-            agent.speed = 3.5f;
+            //transform.LookAt(new Vector3(goal.position.x, this.transform.position.y, goal.position.z));
+            Quaternion target = Quaternion.LookRotation(goal.position - this.transform.position, Vector3.left);
+            target.x = 0;
+            target.z = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 8);
         }
-        */
+        
         workingTime = 0;
 
         if(Input.GetKeyDown(KeyCode.Escape))

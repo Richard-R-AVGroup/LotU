@@ -22,6 +22,7 @@ public class playerBehaviour : MonoBehaviour
     public GameObject weapon;
     public GameObject weaponLocation;      // location of the weapon model
     public GameObject playerEyes;
+    public GameObject camTarget;
 
     public Camera playerCamera;
 
@@ -199,10 +200,10 @@ public class playerBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "NPC" && Input.GetKeyDown(KeyCode.E))
         {
+            camTarget = other.gameObject;
             playerCamera.GetComponent<cameraBehaviour>().move = true;
             other.GetComponent<npcPathfinding>().talking = true;
             other.GetComponent<npcPathfinding>().goal = this.gameObject.GetComponent<Transform>().transform;
-
             talking = true;
             StartCoroutine("talkingCamera");
         }
@@ -220,6 +221,10 @@ public class playerBehaviour : MonoBehaviour
             yield return new WaitForSeconds(1 * Time.deltaTime);
             playerCamera.transform.position = Vector3.Slerp(playerCamera.transform.position, playerEyes.transform.position, 0.3f);
             playerCamera.transform.rotation = Quaternion.Slerp(playerCamera.transform.rotation, playerEyes.transform.rotation, 0.3f);
+            Quaternion target = Quaternion.LookRotation(transform.position - camTarget.transform.position, Vector3.up) * Quaternion.Euler(0,-90,0);
+            target.x = 0;
+            target.z = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 8);
         }
         
     }

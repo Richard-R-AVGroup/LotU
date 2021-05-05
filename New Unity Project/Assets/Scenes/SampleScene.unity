@@ -1043,7 +1043,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 2
 --- !u!114 &133286010
 MonoBehaviour:
@@ -1069,6 +1069,7 @@ MonoBehaviour:
   weapon: {fileID: 1120691875}
   weaponLocation: {fileID: 1120691875}
   playerEyes: {fileID: 1376986269}
+  camTarget: {fileID: 0}
   playerCamera: {fileID: 963194227}
 --- !u!136 &133286011
 CapsuleCollider:
