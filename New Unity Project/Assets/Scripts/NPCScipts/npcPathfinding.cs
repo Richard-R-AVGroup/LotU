@@ -2,9 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class npcPathfinding : MonoBehaviour
 {
+
+    public enum npcType
+    {
+        Shopkeep,
+        Peasant
+    }
 
     public Transform goal;
     NavMeshAgent agent;
@@ -12,10 +19,12 @@ public class npcPathfinding : MonoBehaviour
     public float navWait;
     public bool enterDoor;
 
+    public npcType aiType;
     public bool shopkeeper;
     public bool working;
     public bool active;
     public bool talking;
+    public bool met;
 
     public GameObject ownedStore;
     public Transform[] owned;
@@ -26,6 +35,8 @@ public class npcPathfinding : MonoBehaviour
     public GameObject selectedObj;
     public bool timeWait;
 
+    public TMP_Text diaBox;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +46,7 @@ public class npcPathfinding : MonoBehaviour
         navWait = 1;                                    //door waiting time (Seconds)
         enterDoor = false;                              //bool to show if the npc is going through a door
         workingTime = Random.Range(3, 6);               //time int to determine when the npc should change position
+        met = false;                                    //player has/has not met the NPC
     }
 
     // Update is called once per frame
@@ -168,6 +180,7 @@ public class npcPathfinding : MonoBehaviour
             target.x = 0;
             target.z = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 8);
+            
         }
         
         workingTime = 0;

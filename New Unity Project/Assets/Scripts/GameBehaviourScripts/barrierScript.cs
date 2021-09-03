@@ -5,19 +5,7 @@ using TMPro;
 
 public class barrierScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)                       //On collision with invisible border, display a message
     {
         if (collision.gameObject.name == "Player")
         {
@@ -25,7 +13,7 @@ public class barrierScript : MonoBehaviour
         }
     }
 
-    public void OnCollisionExit(Collision collision)
+    public void OnCollisionExit(Collision collision)                        //When player exits the collision with the border, start the countdown to clear message
     {
         if (collision.gameObject.name == "Player")
         {
@@ -33,7 +21,7 @@ public class barrierScript : MonoBehaviour
         }
     }
 
-    private IEnumerator waitAndClear(float clearTime)
+    private IEnumerator waitAndClear(float clearTime)                       //Coroutine to wait 2 seconds before clearing the border message
     {
         yield return new WaitForSeconds(clearTime);
         GameObject.Find("UpdateText").GetComponent<TMP_Text>().text = "";

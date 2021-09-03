@@ -7,6 +7,7 @@ public class gmBehaviour : MonoBehaviour
 
     public static gmBehaviour instance = null;
     public bool isPaused;
+    public bool debug;
 
     public int test = 4;
 
@@ -27,9 +28,18 @@ public class gmBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPaused == true)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
+        if (debug == false)
+        {
+            if (isPaused == true)
+            {
+                Time.timeScale = 0;
+                GameObject.Find("Directional Light").GetComponent<sunBehaviour>().sunSpeed = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                GameObject.Find("Directional Light").GetComponent<sunBehaviour>().sunSpeed = 0.1f;
+            }
+        }
     }
 }

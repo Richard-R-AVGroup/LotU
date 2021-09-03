@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\dummyBehaviour.cs" />
     <Compile Include="Assets\Scripts\BuildingScripts\wallBehaviour.cs" />
     <Compile Include="Assets\Scripts\GameBehaviourScripts\gmBehaviour.cs" />
+    <Compile Include="Assets\textLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

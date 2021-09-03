@@ -22,6 +22,7 @@ public class cameraBehaviour : MonoBehaviour
     {
         move = false;
         currentRot = this.transform.rotation;
+        wallHit = null;
     }
 
     // Update is called once per frame
@@ -65,11 +66,13 @@ public class cameraBehaviour : MonoBehaviour
             {
                 if (hit.collider.name == wallHit.name && wallHit.GetComponent<wallBehaviour>().sideWall == false)
                 {
-                    foreach(wallBehaviour child in wallChildren)
+                    foreach (wallBehaviour child in wallChildren)
                     {
                         child.hit = true;
                     }
                 }
+                else
+                    return;
                 if (hit.collider.name != objName)
                 {
 
@@ -82,6 +85,7 @@ public class cameraBehaviour : MonoBehaviour
                     objName = hit.collider.gameObject.name;
                     wallHit = GameObject.Find(objName);
                 }
+                
 
                 
                 
@@ -107,7 +111,5 @@ public class cameraBehaviour : MonoBehaviour
         }
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * 100), Color.red);
-        //layerMask = ~layerMask;
-
     }
 }
